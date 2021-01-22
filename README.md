@@ -22,7 +22,7 @@ ADMINISTRACIÓ DE SISTEMES LINUX (Curs 11)
 
 ## Videos
 - [ ] 1-LINUX (06:38:42)
-  - [ ] 1.1-Intro
+  - [x] 1.1-Intro
   - [ ] 1.2-Processes
   - [ ] 1.3-Filesystems
   - [ ] 1.4-Filedescriptors
