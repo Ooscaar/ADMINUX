@@ -22,7 +22,7 @@ ADMINISTRACIÓ DE SISTEMES LINUX (Curs 11)
 
 ## Videos
 - [ ] 1-LINUX (06:38:42)
-  - [ ] 1.1-Intro
+  - [x] 1.1-Intro
   - [ ] 1.2-Processes
   - [ ] 1.3-Filesystems
   - [ ] 1.4-Filedescriptors
@@ -35,7 +35,7 @@ ADMINISTRACIÓ DE SISTEMES LINUX (Curs 11)
 - [ ] 4-Apps (02:04:54)
   - [ ] 4.1-Basic
   - [ ] 4.2-UnixGUI
-- [ ] 5-Apps (03:11:54)
+- [ ] 5-Linux Administration (03:11:54)
   - [ ] 5.1-Scripts
 
 ## Practices (book)
