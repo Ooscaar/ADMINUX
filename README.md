@@ -35,7 +35,7 @@ ADMINISTRACIÓ DE SISTEMES LINUX (Curs 11)
 - [ ] 4-Apps (02:04:54)
   - [ ] 4.1-Basic
   - [ ] 4.2-UnixGUI
-- [ ] 5-Apps (03:11:54)
+- [ ] 5-Linux Administration (03:11:54)
   - [ ] 5.1-Scripts
 
 ## Practices (book)
