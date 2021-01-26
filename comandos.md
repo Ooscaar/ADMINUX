@@ -1,4 +1,5 @@
 # Lista de comandos
+## Procesos
 - `lsmod`: te indica los "módulos" cargados en el kernel
 - `tty`: indica el fichero asociado a nuestro terminal. No deja de ser la representación "virtual" de lo que era el puerto físico 
   - si uso tmux y voy ejecutando `tty` se puede ir observando como va saliendo /dev/pts/x
@@ -26,4 +27,13 @@
 - `fg`: foreground el ultimo proceso, indicando el número de job id
 - `bg`: background
 
+## Sistema de ficheros
+- `stat`: te indica, junto a diveros metadatos, la información del fichero que le indicas
+- `mount`: comando que indica los dispositivos que estan montados en el sistema de ficheros
+- `unmount`: desmonta el dispositivo
+- `df -h`: te indica "disk free" space
+- `du -sh ..` disk usage
+- `file`: pasando una serie de test, intenta encontrar el tipo de fichero del que se trata
+- `tail -f`: muestra los últimos contenidos del fichero y los va refrescando continuamente
+- `hexdump | strings`: el método de string muestra solo aquellos que son imprimibles
 
