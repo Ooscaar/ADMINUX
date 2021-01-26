@@ -33,9 +33,7 @@ ADMINISTRACIÓ DE SISTEMES LINUX (Curs 11)
 - [ ] 3-Transport (01:35:22)
   - [ ] 3.1-Overwiew
 - [ ] 4-Apps (02:04:54)
-  - [ ] 4.1-Basic# ADMINUX
-ADMINISTRACIÓ DE SISTEMES LINUX (Curs 11)
-- Videos: http://j3o.upc.edu:8000/Networks/videos/adminux/
+  - [ ] 4.1-Basic
 
 ## Organization
 - **I: Linux Essentials**  
@@ -59,7 +57,7 @@ ADMINISTRACIÓ DE SISTEMES LINUX (Curs 11)
 - [ ] 1-LINUX (06:38:42)
   - [x] 1.1-Intro
   - [x] 1.2-Processes
-  - [ ] 1.3-Filesystems
+  - [x] 1.3-Filesystems
   - [ ] 1.4-Filedescriptors
 - [ ] 2 - Virtualization (01:48:06) 
   - [ ] 2.1-Intro
