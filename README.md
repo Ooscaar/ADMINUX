@@ -38,7 +38,7 @@ ADMINISTRACIÓ DE SISTEMES LINUX (Curs 11)
 ## Practices (book)
 - **I**:
   - [x] 2.13: Processes
-  - [ ] 3.18: Filesystem
+  - [x] 3.18: Filesystem
   - [ ] 4.10: File Descriptors
 - **II (optional)** 
   - [ ] 6.7: User Mode Linux (UML)
