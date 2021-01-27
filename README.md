@@ -25,7 +25,7 @@ ADMINISTRACIÓ DE SISTEMES LINUX (Curs 11)
   - [x] 1.1-Intro
   - [x] 1.2-Processes
   - [x] 1.3-Filesystems
-  - [ ] 1.4-Filedescriptors
+  - [x] 1.4-Filedescriptors
 - [ ] 2 - Virtualization (01:48:06) 
   - [ ] 2.1-Intro
   - [ ] 2.2-UML
@@ -39,7 +39,7 @@ ADMINISTRACIÓ DE SISTEMES LINUX (Curs 11)
 - **I**:
   - [x] 2.13: Processes
   - [x] 3.18: Filesystem
-  - [ ] 4.10: File Descriptors
+  - [x] 4.10: File Descriptors
 - **II (optional)** 
   - [ ] 6.7: User Mode Linux (UML)
 - **III (optional)**:
