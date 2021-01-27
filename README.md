@@ -34,6 +34,8 @@ ADMINISTRACIÓ DE SISTEMES LINUX (Curs 11)
   - [ ] 3.1-Overwiew
 - [ ] 4-Apps (02:04:54)
   - [ ] 4.1-Basic
+- [ ] 5-LINUXAD (03:11:54)
+  - [ ] 5.1-Scripts
 
 ## Practices (book)
 - **I**:
