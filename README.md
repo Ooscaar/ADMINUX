@@ -21,7 +21,7 @@ ADMINISTRACIÓ DE SISTEMES LINUX (Curs 11)
   - System administration
 
 ## Videos
-- [ ] 1-LINUX (06:38:42)
+- [x] 1-LINUX (06:38:42)
   - [x] 1.1-Intro
   - [x] 1.2-Processes
   - [x] 1.3-Filesystems
