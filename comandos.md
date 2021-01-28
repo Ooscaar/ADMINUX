@@ -37,3 +37,16 @@
 - `tail -f`: muestra los últimos contenidos del fichero y los va refrescando continuamente
 - `hexdump | strings`: el método de string muestra solo aquellos que son imprimibles
 
+## Descriptor de ficheros
+- `lsof`: list open files. Permite ver los descritores de ficheros de un determinado proceso
+```bash
+opc :: /tmp » lsof -a -p 4803 -d0-10
+COMMAND  PID USER   FD   TYPE DEVICE SIZE/OFF NODE NAME
+zsh     4803   op    0u   CHR  136,2      0t0    5 /dev/pts/2
+zsh     4803   op    1u   CHR  136,2      0t0    5 /dev/pts/2
+zsh     4803   op    2u   CHR  136,2      0t0    5 /dev/pts/2
+zsh     4803   op   10u   CHR  136,2      0t0    5 /dev/pts/2
+```
+- Se puede observar como los descriptores de fichero 0,1,2 estan conectados al fichero "/dev/pts/2" asociado al terminal sobre el que se ejecuta el proceso
+- `fuser`: 
+
