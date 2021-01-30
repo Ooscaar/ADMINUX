@@ -1,0 +1,337 @@
+## Process
+
+### Exercise 2.1
+1.
+By searching the pattern `/ppid` and then `n/N` for moving upwards/backwards, we find **7** ocurrences
+
+2. 
+Command:
+```bash
+opc :: ~ » ps -o cmd,tty,pid
+CMD                         TT           PID
+/usr/bin/zsh                pts/3      45474
+ps -o cmd,tty,pid           pts/3      45521
+```
+vs
+```bash
+opc :: ~ » ps -o cmd,tty,pid
+CMD                         TT           PID
+/usr/bin/zsh                tty2      	45476
+ps -o cmd,tty,pid           tty2      	45556
+```
+- The TT column is different (terminal emulator vs virtual console)
+
+3. 
+Command
+```bash
+opc :: ~ » ps -o pid,comm   
+    PID COMMAND
+  45474 zsh
+  45926 ps
+opc :: ~ » ps -o pid,cmd 
+    PID CMD
+  45474 /usr/bin/zsh
+  45936 ps -o pid,cmd
+opc :: ~ » 
+```
+- Cmd: shows the name of the executable, including also the argument passed. If the command is not a bash built-in, the command show the absolute path of the executable. See the diference using bash instead of zsh:
+```bash
+[op@opc ~]$ ps -o pid,cmd
+    PID CMD
+  45474 /usr/bin/zsh
+  46074 bash
+  46113 ps -o pid,cmd
+[op@opc ~]$ 
+```
+- Comm: shows the name of the command
+
+4. 
+Command:
+```bash
+systemd
+|
+.
+.
+.
+|--kdeinit5---file.so
+|          |--kaccess---2*[{kaccess}]
+|          |--kded5---konsole---zsh---tmux: client
+|          |       |         '--7*[{konsole}]
+|          |       |--konsole---zsh
+|          |       |         '--6*[{konsole}]
+|          |       |--konsole---zsh---pstree
+|          |       |         '--6*[{konsole}]
+|          |       '--6*[{kded5}]
+
+```
+We have the following structure:
+- pstree process
+- zsh: parent process acting as the interpreter who executes de pstree command
+- konsole: terminal emulator used
+- kded5: consolidates several small services in one process.
+- kdeinit5: kdeinit5 is a process launcher somewhat similar to the famous init used for booting UNIX. It executes KDE programs and kdeinit loadable modules (KLMs) starting them more efficiently.
+And by looking a the whole structure more precisely:
+```bash
+kdeinit5(1436)---file.so(2095)
+               |--kaccess(1447)---{kaccess}(1448)
+               |               '--{kaccess}(1460)
+               |--kded5(1440)---konsole(26378)---zsh(26387)---tmux: client(29455)
+               |             |--konsole(45467)---zsh(45474)---pstree(48850)
+               |             |                |--{konsole}(45468)
+               |             |                |--{konsole}(45469)
+               |             |                |--{konsole}(45470)
+               |             |                |--{konsole}(45471)
+               |             |                |--{konsole}(45472)
+               |             |                '--{konsole}(45473)
+```
+we can see the whole hierarchy with the pid associated to them with the threads associated ({})
+
+5.
+By looking, in my case, through a tmux instance, we see the following structure:
+```bash
+opc :: /tmp » pstree -c -g -p 29457        
+tmux: server(29457,29457)---zsh(29458,29458)
+                          |--zsh(29500,29500)---evince(35564,35564)---{evince}(35568,35564)
+                          |                                        |--{evince}(35569,35564)
+                          |                                        |--{evince}(35571,35564)
+                          |                                        '--{evince}(35588,35564)
+                          |--zsh(37609,37609)---vim(37739,37739)
+                          |--zsh(37756,37756)---vim(37994,37994)
+                          '--zsh(38636,38636)
+opc :: /tmp » 
+```
+where:
+- Each tab is represented as a new child process, where all of them have a common parent -tmux: server
+- We can see the same structure in each "tab-window". An instance of zsh (alternative of bash) that executes the corresponding application (evince, vim)
+
+6.
+By opening an xterm console, we see the following:
+```bash
+|-plasmashell(1498,1496)
+|                        |-xterm(54003,1496)---zsh(54006,54006) ...
+
+```
+- The parent process is not the same as we are not using a native kde application, which were controlled by a kde5 process.
+
+7. 
+We have the following:
+- t1: running in foreground. The terminal is "blocked" and we can not execute another program
+- t2: running in the background. We can execute other programs in the terminal and we have the pid associated with the xclock program (pid: 54875)
+
+8.   
+Where the possible states are the following:
+```
+PROCESS STATE CODES
+       Here are the different values that the s, stat and state output specifiers (header "STAT" or "S") will display to describe the state of
+       a process:
+
+               D    uninterruptible sleep (usually IO)
+               I    Idle kernel thread
+               R    running or runnable (on run queue)
+               S    interruptible sleep (waiting for an event to complete)
+               T    stopped by job control signal
+               t    stopped by debugger during the tracing
+               W    paging (not valid since the 2.6.xx kernel)
+               X    dead (should never be seen)
+               Z    defunct ("zombie") process, terminated but not reaped by its parent
+``` 
+- t1: by executing
+```bash
+opc :: ~ » ps -C xeyes -o pid,state,tty,ppid
+    PID S TT          PPID
+  54854 S pts/10     37756
+opc :: ~ » 
+```
+where the states a
+- t2: 
+```bash
+opc :: ~ » ps -C xclock -o pid,state,tty,ppid
+    PID S TT          PPID
+  54797 S pts/3      45474
+opc :: ~ » 
+```
+We can see that:
+- We have differents tty, as we are using differents "konsole" windows
+- Each one has a different PPID, as they are created from differents zsh instances
+
+9.
+```bash
+opc :: ~ » kill -9 37756
+```
+
+10. 
+First we tried to do it with zsh, but zsh does not enable orphan process, as when you type exit(terminating the zsh processs) zsh terminates all the background process iniciated by zsh.
+So we then do it with bash:
+- PPID: 57901
+Then:
+```bash
+opc :: ~ » ps -C xclock -o pid,state,tty,ppid
+    PID S TT          PPID
+  57936 S pts/2          1
+opc :: ~ » 
+```
+- As we see it, now the process has the init process (PID=1) as a parent
+
+11.
+```bash
+opc :: ~ » kill -9 57936
+```
+
+12,13,14.
+- Using signals:
+```bash
+opc :: ~ » ps -C xclock -o pid,state,tty,ppid
+    PID S TT          PPID
+  89002 S pts/6      88397
+opc :: ~ » kill -SIGSTOP 89002               
+opc :: ~ » ps -C xclock -o pid,state,tty,ppid
+    PID S TT          PPID
+  89002 T pts/6      88397
+opc :: ~ » kill -SIGCONT 89002
+opc :: ~ » ps -C xclock -o pid,state,tty,ppid
+    PID S TT          PPID
+  89002 S pts/6      88397
+opc :: ~ » kill -SIGKILL 89002 
+```
+- Using job control 
+```bash
+opc :: ~ » xclock 
+Warning: Missing charsets in String to FontSet conversion
+^Z
+[1]  + 90314 suspended  xclock
+opc :: ~ » jobs                                                                                                       148 ↵
+[1]  + suspended  xclock
+opc :: ~ » kill -SIGCONT %1       
+opc :: ~ » jobs
+[1]  + running    xclock
+opc :: ~ » kill -SIGKILL %1
+[1]  + 90314 killed     xclock                                                                                              
+opc :: ~ » 
+```
+
+15.
+```bash
+opc :: ~ » jobs
+[1]    running    xclock
+[2]    running    xclock
+[3]  - running    xeyes
+[4]  + running    xeyes
+opc :: ~ » fg %1
+^Z
+opc :: ~ » bg %1
+opc :: ~ » killall xclock
+opc :: ~ » killall xeyes
+```
+
+16.
+```bash
+opc :: ~ » ps && sleep 3 && ps
+    PID TTY          TIME CMD
+  87876 pts/2    00:00:06 zsh
+  91167 pts/2    00:00:00 ps
+    PID TTY          TIME CMD
+  87876 pts/2    00:00:06 zsh
+  91170 pts/2    00:00:00 ps
+opc :: ~ » 
+```
+- We can see that the PID of the ps instance is different after the sleep(3), as we are creating different processes
+
+17.
+```bash
+opc :: ~ » ps -nothing || ps 
+error: unsupported SysV option
+
+Usage:
+ ps [options]
+
+ Try 'ps --help <simple|list|output|threads|misc|all>'
+  or 'ps --help <s|l|o|t|m|a>'
+ for additional help text.
+
+For more details see ps(1).
+    PID TTY          TIME CMD
+  87876 pts/2    00:00:06 zsh
+  91301 pts/2    00:00:00 ps
+opc :: ~ » 
+```
+- The last command (ps) will only execute if the first one has and error exit code, which is the case
+
+18.
+- 1:
+```bash
+opc :: ~ » sleep || sleep || ls 
+sleep: falta un operando
+Pruebe 'sleep --help' para más información.
+sleep: falta un operando
+Pruebe 'sleep --help' para más información.
+bin  Descargas  Documentos  Escritorio  Imágenes  kwin-tiling  m  Python  Universidad  VM
+opc :: ~ » 
+```
+  -  As "||" will only execute if the first one has an error, the first one sleep have errors, so the ls commands is executed 
+- 2:
+```bash
+opc :: ~ » sleep && sleep --help || ls && ps
+sleep: falta un operando
+Pruebe 'sleep --help' para más información.
+bin  Descargas  Documentos  Escritorio  Imágenes  kwin-tiling  m  Python  Universidad  VM
+    PID TTY          TIME CMD
+  87876 pts/2    00:00:07 zsh
+  91700 pts/2    00:00:00 ps
+opc :: ~ » 
+```
+- The first sleep has an error, so the second one will not execute
+- As the last executed was exit successfully, the ls command will execute
+- The last ps will execute, as the previous command did not have any error
+- 3:
+```bash
+pc :: ~ » sleep && sleep --help || ls || ps                             
+sleep: falta un operando
+Pruebe 'sleep --help' para más información.
+bin  Descargas  Documentos  Escritorio  Imágenes  kwin-tiling  m  Python  Universidad  VM
+opc :: ~ » 
+
+```
+- The same as before, but the last ps will not execute as the "ls" command did run successfully
+
+
+### Exercise 2.2
+
+1.
+- script.sh:
+```bash
+#!/bin/sh
+# script.sh
+
+read NUMBER
+echo "Number: $NUMBER"
+echo "Result: $[NUMBER * 7]"
+```
+- result:
+```bash
+opc :: /tmp » ./script.sh                                  
+8
+Number: 8
+Result: 56
+opc :: /tmp » 
+```
+
+2. 
+- script2.sh
+```bash
+#!/bin/sh
+# script2.sh
+
+# Trap function
+trap "echo signal captured" USR1
+
+# Main function
+while true
+do
+        sleep 1
+done
+```
+- result:
+```bash
+opc :: /tmp » kill -USR1 93268      
+opc :: /tmp » signal captured
+```
