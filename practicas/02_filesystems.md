@@ -1,8 +1,8 @@
 ## File system
 
 ### Exercise 3.1
-1,2,3,4,5.
-```bash
+-1,2,3,4,5.
+```
 # Moving directories
 opc :: /tmp/ADMINUX » cd ~          
 opc :: ~ » cd ../../etc 
@@ -17,8 +17,8 @@ opc :: /tmp » rm -rf dir{A,B}*
 opc :: /tmp » rm -rf dirC?
 ```
 
-6,7,8,9.
-```bash
+-6,7,8,9.
+```
 # Creation files
 opc :: /tmp » touch temp.txt  
 opc :: /tmp » cat temp.txt      
@@ -34,8 +34,8 @@ Modificación: 2021-01-26 16:43:54.511964491 +0100
 opc :: /tmp » 
 ```
 
-10. 
-```bash
+-10. 
+```
 opc :: /tmp » cp temp.txt /usr    
 cp: no se puede crear el fichero regular '/usr/temp.txt': Permiso denegado
 opc :: /tmp » 
@@ -47,8 +47,8 @@ drwxr-xr-x.  13 root root  4096 nov  6 21:54 usr
 ```
   - We can see that only the root user and root groupd have the basics permisions. The other only have the "x" permision i.e. execution of programs
 
-11,12.
-```bash
+-11,12.
+```
 opc :: /tmp/practices » mkdir permission
 opc :: /tmp/practices » mkdir no_permission
 opc :: /tmp/practices » chmod u-w no_permission
@@ -60,14 +60,14 @@ drwxrwxr-x. 2 op op 40 ene 26 16:53 permission
 opc :: /tmp/practices » 
 ```
 - We don't have write permission to the no_permission directory, so we can not create any files inside it
-```bash
+```
 opc :: /tmp/practices » touch no_permission/temp.txt
 touch: no se puede efectuar `touch' sobre 'no_permission/temp.txt': Permiso denegado
 opc :: /tmp/practices » touch permission/tempt.txt                                                                      
 opc :: /tmp/practices »
 ```
 
-13.
+-13.
 ```
 Commands 				read | write | execute
 ------- 				----------------------
@@ -78,16 +78,16 @@ cd temp ~/practices/no_permission       ok     ok      no
 
 
 ### Exercise 3.2
-1,2,3.
-```bash
+-1,2,3.
+```
 opc :: /tmp » touch temp.txt            
 opc :: /tmp » touch origin.txt         
 opc :: /tmp » ln -s origin.txt link.txt
 ```
 - Does not matter which file we modify.
 
-4. 
-```bash
+-4. 
+```
 opc :: /tmp » chmod u-rwx origin.txt 
 opc :: /tmp » cat origin.txt        
 cat: origin.txt: Permiso denegado
@@ -97,8 +97,8 @@ opc :: /tmp »
 ```
 - We can not do anything from the symbolic link neither
 
-5. 
-```bash
+-5. 
+```
 opc :: /tmp/practices » chmod u-w link.txt      
 opc :: /tmp/practices » ls -l             
 total 4
@@ -110,11 +110,11 @@ opc :: /tmp/practices »
 ```
 - Removing the write permision into the symbolic link **implies removing access to the main file**
 
-6. 
+-6. 
 - In this case, the "hello" is then transfered to the origin.txt. While the origin.txt does not exist, "link.txt" has a broken link, but it "has some content inside" that is "transfered" once we create the archive by opening vi.
 
-7,8,9.
-```bash
+-7,8,9.
+```
 opc :: /tmp/practices » stat origin.txt 
   Fichero: origin.txt
   Tamaño: 6             Bloques: 8          Bloque E/S: 4096   fichero regular
@@ -134,21 +134,21 @@ So in conclusion:
 - Hard link: creation of the same file
 - Soft link: link to a file that can o can not exist
 
-10. 
-```bash
+-10. 
+```
 opc :: /tmp » cat /etc/services| grep "HTTP" | wc -l
 104
 opc :: /tmp » 
 ```
 
-11.
-```bash
+-11.
+```
 opc :: /tmp » cat /etc/group | cut -d ":" -f 1,4  
 ```
 - Where not all the groups have some user in them
 
-12.
-```bash
+-12.
+```
 opc :: /tmp » touch tex1.txt  
 opc :: /tmp » echo "abñ" > tex1.txt                                            
 opc :: /tmp » file tex1.txt 
@@ -156,7 +156,7 @@ tex1.txt: UTF-8 Unicode text
 opc :: /tmp » 
 ```
 
-13.
+-13.
 The encoding of "ñ" is:
 - ISO-8859-15: 0x00F1
 - UTF-8: 0xC3 B1
@@ -169,7 +169,7 @@ opc :: /tmp » hexdump tex1.txt
 opc :: /tmp » 
 ```
 
-14,15,16.
+-14,15,16.
 - 0x0a (UTF-8): corresponts to the line feed (EOL)
 - 0x0d (UTF-8): corresponts to the carriage return (cr)
 

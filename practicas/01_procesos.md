@@ -1,19 +1,20 @@
+# ADMINUX
 ## Process
 
 ### Exercise 2.1
-1.
+-1.
 By searching the pattern `/ppid` and then `n/N` for moving upwards/backwards, we find **7** ocurrences
 
-2. 
+-2. 
 Command:
-```bash
+```
 opc :: ~ » ps -o cmd,tty,pid
 CMD                         TT           PID
 /usr/bin/zsh                pts/3      45474
 ps -o cmd,tty,pid           pts/3      45521
 ```
 vs
-```bash
+```
 opc :: ~ » ps -o cmd,tty,pid
 CMD                         TT           PID
 /usr/bin/zsh                tty2      	45476
@@ -21,9 +22,9 @@ ps -o cmd,tty,pid           tty2      	45556
 ```
 - The TT column is different (terminal emulator vs virtual console)
 
-3. 
+-3. 
 Command
-```bash
+```
 opc :: ~ » ps -o pid,comm   
     PID COMMAND
   45474 zsh
@@ -35,7 +36,7 @@ opc :: ~ » ps -o pid,cmd
 opc :: ~ » 
 ```
 - Cmd: shows the name of the executable, including also the argument passed. If the command is not a bash built-in, the command show the absolute path of the executable. See the diference using bash instead of zsh:
-```bash
+```
 [op@opc ~]$ ps -o pid,cmd
     PID CMD
   45474 /usr/bin/zsh
@@ -45,9 +46,9 @@ opc :: ~ »
 ```
 - Comm: shows the name of the command
 
-4. 
+-4. 
 Command:
-```bash
+```
 systemd
 |
 .
@@ -71,7 +72,7 @@ We have the following structure:
 - kded5: consolidates several small services in one process.
 - kdeinit5: kdeinit5 is a process launcher somewhat similar to the famous init used for booting UNIX. It executes KDE programs and kdeinit loadable modules (KLMs) starting them more efficiently.
 And by looking a the whole structure more precisely:
-```bash
+```
 kdeinit5(1436)---file.so(2095)
                |--kaccess(1447)---{kaccess}(1448)
                |               '--{kaccess}(1460)
@@ -86,9 +87,9 @@ kdeinit5(1436)---file.so(2095)
 ```
 we can see the whole hierarchy with the pid associated to them with the threads associated ({})
 
-5.
+-5.
 By looking, in my case, through a tmux instance, we see the following structure:
-```bash
+```
 opc :: /tmp » pstree -c -g -p 29457        
 tmux: server(29457,29457)---zsh(29458,29458)
                           |--zsh(29500,29500)---evince(35564,35564)---{evince}(35568,35564)
@@ -104,21 +105,21 @@ where:
 - Each tab is represented as a new child process, where all of them have a common parent -tmux: server
 - We can see the same structure in each "tab-window". An instance of zsh (alternative of bash) that executes the corresponding application (evince, vim)
 
-6.
+-6.
 By opening an xterm console, we see the following:
-```bash
+```
 |-plasmashell(1498,1496)
 |                        |-xterm(54003,1496)---zsh(54006,54006) ...
 
 ```
 - The parent process is not the same as we are not using a native kde application, which were controlled by a kde5 process.
 
-7. 
+-7. 
 We have the following:
 - t1: running in foreground. The terminal is "blocked" and we can not execute another program
 - t2: running in the background. We can execute other programs in the terminal and we have the pid associated with the xclock program (pid: 54875)
 
-8.   
+-8.   
 Where the possible states are the following:
 ```
 PROCESS STATE CODES
@@ -136,7 +137,7 @@ PROCESS STATE CODES
                Z    defunct ("zombie") process, terminated but not reaped by its parent
 ``` 
 - t1: by executing
-```bash
+```
 opc :: ~ » ps -C xeyes -o pid,state,tty,ppid
     PID S TT          PPID
   54854 S pts/10     37756
@@ -144,7 +145,7 @@ opc :: ~ »
 ```
 where the states a
 - t2: 
-```bash
+```
 opc :: ~ » ps -C xclock -o pid,state,tty,ppid
     PID S TT          PPID
   54797 S pts/3      45474
@@ -154,17 +155,17 @@ We can see that:
 - We have differents tty, as we are using differents "konsole" windows
 - Each one has a different PPID, as they are created from differents zsh instances
 
-9.
-```bash
+-9.
+```
 opc :: ~ » kill -9 37756
 ```
 
-10. 
+-10. 
 First we tried to do it with zsh, but zsh does not enable orphan process, as when you type exit(terminating the zsh processs) zsh terminates all the background process iniciated by zsh.
 So we then do it with bash:
 - PPID: 57901
 Then:
-```bash
+```
 opc :: ~ » ps -C xclock -o pid,state,tty,ppid
     PID S TT          PPID
   57936 S pts/2          1
@@ -172,14 +173,14 @@ opc :: ~ »
 ```
 - As we see it, now the process has the init process (PID=1) as a parent
 
-11.
-```bash
+-11.
+```
 opc :: ~ » kill -9 57936
 ```
 
-12,13,14.
+-12,13,14.
 - Using signals:
-```bash
+```
 opc :: ~ » ps -C xclock -o pid,state,tty,ppid
     PID S TT          PPID
   89002 S pts/6      88397
@@ -194,7 +195,7 @@ opc :: ~ » ps -C xclock -o pid,state,tty,ppid
 opc :: ~ » kill -SIGKILL 89002 
 ```
 - Using job control 
-```bash
+```
 opc :: ~ » xclock 
 Warning: Missing charsets in String to FontSet conversion
 ^Z
@@ -209,8 +210,8 @@ opc :: ~ » kill -SIGKILL %1
 opc :: ~ » 
 ```
 
-15.
-```bash
+-15.
+```
 opc :: ~ » jobs
 [1]    running    xclock
 [2]    running    xclock
@@ -223,8 +224,8 @@ opc :: ~ » killall xclock
 opc :: ~ » killall xeyes
 ```
 
-16.
-```bash
+-16.
+```
 opc :: ~ » ps && sleep 3 && ps
     PID TTY          TIME CMD
   87876 pts/2    00:00:06 zsh
@@ -236,8 +237,8 @@ opc :: ~ »
 ```
 - We can see that the PID of the ps instance is different after the sleep(3), as we are creating different processes
 
-17.
-```bash
+-17.
+```
 opc :: ~ » ps -nothing || ps 
 error: unsupported SysV option
 
@@ -256,9 +257,9 @@ opc :: ~ »
 ```
 - The last command (ps) will only execute if the first one has and error exit code, which is the case
 
-18.
+-18.
 - 1:
-```bash
+```
 opc :: ~ » sleep || sleep || ls 
 sleep: falta un operando
 Pruebe 'sleep --help' para más información.
@@ -269,7 +270,7 @@ opc :: ~ »
 ```
   -  As "||" will only execute if the first one has an error, the first one sleep have errors, so the ls commands is executed 
 - 2:
-```bash
+```
 opc :: ~ » sleep && sleep --help || ls && ps
 sleep: falta un operando
 Pruebe 'sleep --help' para más información.
@@ -279,11 +280,11 @@ bin  Descargas  Documentos  Escritorio  Imágenes  kwin-tiling  m  Python  Unive
   91700 pts/2    00:00:00 ps
 opc :: ~ » 
 ```
-- The first sleep has an error, so the second one will not execute
-- As the last executed was exit successfully, the ls command will execute
-- The last ps will execute, as the previous command did not have any error
+  - The first sleep has an error, so the second one will not execute
+  - As the last executed was exit successfully, the ls command will execute
+  - The last ps will execute, as the previous command did not have any error
 - 3:
-```bash
+```
 pc :: ~ » sleep && sleep --help || ls || ps                             
 sleep: falta un operando
 Pruebe 'sleep --help' para más información.
@@ -296,9 +297,9 @@ opc :: ~ »
 
 ### Exercise 2.2
 
-1.
+-1.
 - script.sh:
-```bash
+```
 #!/bin/sh
 # script.sh
 
@@ -307,7 +308,7 @@ echo "Number: $NUMBER"
 echo "Result: $[NUMBER * 7]"
 ```
 - result:
-```bash
+```
 opc :: /tmp » ./script.sh                                  
 8
 Number: 8
@@ -315,9 +316,9 @@ Result: 56
 opc :: /tmp » 
 ```
 
-2. 
+-2. 
 - script2.sh
-```bash
+```
 #!/bin/sh
 # script2.sh
 
@@ -331,7 +332,7 @@ do
 done
 ```
 - result:
-```bash
+```
 opc :: /tmp » kill -USR1 93268      
 opc :: /tmp » signal captured
 ```
