@@ -1,0 +1,1400 @@
+\documentclass[a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+
+\usepackage[english]{babel}
+
+\usepackage{geometry}
+\geometry{
+ a4paper,
+ left=25mm,
+ right=25mm,
+ top=25mm,
+ bottom=25mm,
+}
+
+\usepackage{hyperref}
+\hypersetup{%
+ colorlinks,
+ citecolor=black,
+ filecolor=black,
+ linkcolor=black,
+ anchorcolor=black,
+ urlcolor=blue
+}
+
+\usepackage{graphicx}
+
+\usepackage{enumitem}
+\setlist{topsep=0pt}
+
+\usepackage{quoting}
+
+\usepackage[default,osf]{sourcesanspro}
+\usepackage[scaled=.8]{sourcecodepro}
+
+\setlength\parindent{0pt}
+\setlength\parskip{5pt}
+
+\usepackage{titlesec}
+
+\setcounter{secnumdepth}{4}
+\titleformat{\paragraph}{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titleformat{\subparagraph}{\normalfont\normalsize\bfseries}{\thesubparagraph}{1em}{}
+
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd{\ttlh@hang}{\parindent\z@}{\parindent\z@\leavevmode}{}{}
+\patchcmd{\ttlh@hang}{\noindent}{}{}{}
+\makeatother
+
+\usepackage{float}
+
+\usepackage{listings}
+
+\usepackage{xcolor}
+\usepackage{environ}
+
+\newcommand\HorizontalRule{\raisebox{3.5pt}[1.5ex]{\rule{\linewidth}{0.4pt}}}
+
+\newcommand\InlineImage[1]{\raisebox{-0.1em}{\includegraphics[height=0.9em]{#1}}}
+
+\usepackage{array}
+\renewcommand{\extrarowheight}{2pt}
+
+\usepackage{xtab}
+
+\definecolor{boxBackgroundColor}{RGB}{245,245,245}
+\definecolor{boxFrameColor}{RGB}{128,128,128}
+\definecolor{codeRedColor}{RGB}{163,21,21}
+\definecolor{codeBlueColor}{RGB}{0,0,255}
+\definecolor{codeGreenColor}{RGB}{0,128,0}
+\lstdefinelanguage{XML}{  basicstyle=\ttfamily\color{codeBlueColor},  morestring=[b]",  moredelim=[s][\color{codeBlueColor}]{<}{\ },  moredelim=[s][\color{codeBlueColor}]{</}{>},  morecomment=[s]{<?}{?>},  morecomment=[s]{<!--}{-->},  commentstyle=\color{codeGreenColor},  stringstyle=\color{codeRedColor},  identifierstyle=\color{red}}
+
+\newcommand\EnvironmentCaption[1]{\parbox{\textwidth}{\textbf{#1}}}
+
+\lstset{frame=single,basicstyle=\ttfamily,breaklines=true,showstringspaces=false,backgroundcolor=\color{boxBackgroundColor},rulecolor=\color{boxFrameColor},keywordstyle=\color{codeBlueColor},stringstyle=\color{codeRedColor},commentstyle=\color{codeGreenColor}}
+\lstnewenvironment{plain}[1][]{\lstset{#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{xplain}{\lstset{frame=none,backgroundcolor=}\vspace{\parskip}}{}
+\lstnewenvironment{abap}[1][]{\lstset{language=ABAP,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{acm}[1][]{\lstset{language=ACM,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{acmscript}[1][]{\lstset{language=ACMscript,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{acsl}[1][]{\lstset{language=ACSL,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{ada}[1][]{\lstset{language=Ada,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{algol}[1][]{\lstset{language=Algol,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{ant}[1][]{\lstset{language=Ant,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{assembler}[1][]{\lstset{language=Assembler,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{awk}[1][]{\lstset{language=Awk,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{bash}[1][]{\lstset{language=bash,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{basic}[1][]{\lstset{language=Basic,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{clanguage}[1][]{\lstset{language=C,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{cplusplus}[1][]{\lstset{language=C++,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{caml}[1][]{\lstset{language=Caml,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{cil}[1][]{\lstset{language=CIL,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{clean}[1][]{\lstset{language=Clean,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{cobol}[1][]{\lstset{language=Cobol,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{comal80}[1][]{\lstset{language=Comal 80,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{commandcom}[1][]{\lstset{language=command.com,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{comsol}[1][]{\lstset{language=Comsol,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{csh}[1][]{\lstset{language=csh,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{delphi}[1][]{\lstset{language=Delphi,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{eiffel}[1][]{\lstset{language=Eiffel,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{elan}[1][]{\lstset{language=Elan,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{erlang}[1][]{\lstset{language=erlang,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{euphoria}[1][]{\lstset{language=Euphoria,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{fortran}[1][]{\lstset{language=Fortran,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{gcl}[1][]{\lstset{language=GCL,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{gnuplot}[1][]{\lstset{language=Gnuplot,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{hansl}[1][]{\lstset{language=hansl,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{haskell}[1][]{\lstset{language=Haskell,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{html}[1][]{\lstset{language=HTML,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{idl}[1][]{\lstset{language=IDL,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{inform}[1][]{\lstset{language=inform,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{java}[1][]{\lstset{language=Java,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{jvmis}[1][]{\lstset{language=JVMIS,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{ksh}[1][]{\lstset{language=ksh,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{lingo}[1][]{\lstset{language=Lingo,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{lisp}[1][]{\lstset{language=Lisp,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{llvm}[1][]{\lstset{language=LLVM,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{logo}[1][]{\lstset{language=Logo,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{lua}[1][]{\lstset{language=Lua,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{make}[1][]{\lstset{language=make,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{matlab}[1][]{\lstset{language=Matlab,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{mathematica}[1][]{\lstset{language=Mathematica,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{mercury}[1][]{\lstset{language=Mercury,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{metapost}[1][]{\lstset{language=MetaPost,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{miranda}[1][]{\lstset{language=Miranda,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{mizar}[1][]{\lstset{language=Mizar,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{ml}[1][]{\lstset{language=ML,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{modula2}[1][]{\lstset{language=Modula-2,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{mupad}[1][]{\lstset{language=MuPAD,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{nastran}[1][]{\lstset{language=NASTRAN,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{oberon2}[1][]{\lstset{language=Oberon-2,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{ocl}[1][]{\lstset{language=OCL,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{octave}[1][]{\lstset{language=Octave,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{oz}[1][]{\lstset{language=Oz,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{perl}[1][]{\lstset{language=Perl,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{pascal}[1][]{\lstset{language=Pascal,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{php}[1][]{\lstset{language=PHP,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{pli}[1][]{\lstset{language=PL/I,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{plasm}[1][]{\lstset{language=Plasm,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{postscript}[1][]{\lstset{language=PostScript,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{pov}[1][]{\lstset{language=POV,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{prolog}[1][]{\lstset{language=Prolog,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{promela}[1][]{\lstset{language=Promela,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{pstricks}[1][]{\lstset{language=PSTricks,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{python}[1][]{\lstset{language=Python,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{rlanguage}[1][]{\lstset{language=R,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{reduce}[1][]{\lstset{language=Reduce,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{rexx}[1][]{\lstset{language=Rexx,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{rsl}[1][]{\lstset{language=RSL,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{ruby}[1][]{\lstset{language=Ruby,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{slanguage}[1][]{\lstset{language=S,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{sas}[1][]{\lstset{language=SAS,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{scala}[1][]{\lstset{language=Scala,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{scilab}[1][]{\lstset{language=Scilab,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{sh}[1][]{\lstset{language=sh,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{shelxl}[1][]{\lstset{language=SHELXL,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{sparql}[1][]{\lstset{language=SPARQL,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{simula}[1][]{\lstset{language=Simula,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{sql}[1][]{\lstset{language=SQL,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{tcl}[1][]{\lstset{language=tcl,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{tex}[1][]{\lstset{language=TeX,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{vbscript}[1][]{\lstset{language=VBScript,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{verilog}[1][]{\lstset{language=Verilog,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{vhdl}[1][]{\lstset{language=VHDL,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{vrml}[1][]{\lstset{language=VRML,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{xml}[1][]{\lstset{language=XML,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+\lstnewenvironment{xslt}[1][]{\lstset{language=XSLT,#1}\vspace{\parskip}\minipage{\linewidth}}{\endminipage}
+
+\NewEnviron{boxed}[1][]{\vspace{\parskip}\hspace{-3.4pt}\fcolorbox{boxFrameColor}{white}{\minipage{\linewidth}
+\vspace{3.3pt}\BODY
+\vspace{3.4pt}\endminipage}\vspace{3.3pt}}
+
+\let\oldtexttt\texttt
+\renewcommand{\texttt}[1]{\fcolorbox{boxFrameColor}{boxBackgroundColor}{\raisebox{0pt}[0.45em][0pt]{\oldtexttt{#1}}}}
+
+
+
+\begin{document}
+
+
+\title{\bfseries \Huge ADMINUX\\ } \author{Òscar Pérez Castillo} \date{\today}\maketitle\thispagestyle{empty}
+
+\clearpage
+
+\sloppy
+
+\tableofcontents
+
+\clearpage
+
+\section{ADMINUX}
+
+\subsection{Process}
+
+\subsubsection{Exercise 2.1}
+
+{-\allowbreak}1. By searching the pattern \texttt{{/\allowbreak}ppid} and then \texttt{n{/\allowbreak}N} for moving upwards{/\allowbreak}backwards, we find \textbf{7} ocurrences
+
+{-\allowbreak}2.  Command:
+
+\begin{plain}
+opc :: ~ » ps -o cmd,tty,pid
+CMD                         TT           PID
+/usr/bin/zsh                pts/3      45474
+ps -o cmd,tty,pid           pts/3      45521
+\end{plain}
+
+vs
+
+\begin{plain}
+opc :: ~ » ps -o cmd,tty,pid
+CMD                         TT           PID
+/usr/bin/zsh                tty2      	45476
+ps -o cmd,tty,pid           tty2      	45556
+\end{plain}
+
+\begin{itemize}
+\item 
+The TT column is different (terminal emulator vs virtual console)
+\end{itemize}
+
+{-\allowbreak}3.  Command
+
+\begin{plain}
+opc :: ~ » ps -o pid,comm   
+    PID COMMAND
+  45474 zsh
+  45926 ps
+opc :: ~ » ps -o pid,cmd 
+    PID CMD
+  45474 /usr/bin/zsh
+  45936 ps -o pid,cmd
+opc :: ~ » 
+\end{plain}
+
+\begin{itemize}
+\item 
+Cmd: shows the name of the executable, including also the argument passed. If the command is not a bash built{-\allowbreak}in, the command show the absolute path of the executable. See the diference using bash instead of zsh:
+\end{itemize}
+
+\begin{plain}
+[op@opc ~]$ ps -o pid,cmd
+    PID CMD
+  45474 /usr/bin/zsh
+  46074 bash
+  46113 ps -o pid,cmd
+[op@opc ~]$ 
+\end{plain}
+
+\begin{itemize}
+\item 
+Comm: shows the name of the command
+\end{itemize}
+
+{-\allowbreak}4.  Command:
+
+\begin{plain}
+systemd
+|
+.
+.
+.
+|--kdeinit5---file.so
+|          |--kaccess---2*[{kaccess}]
+|          |--kded5---konsole---zsh---tmux: client
+|          |       |         '--7*[{konsole}]
+|          |       |--konsole---zsh
+|          |       |         '--6*[{konsole}]
+|          |       |--konsole---zsh---pstree
+|          |       |         '--6*[{konsole}]
+|          |       '--6*[{kded5}]
+
+\end{plain}
+
+We have the following structure:
+
+\begin{itemize}
+\item 
+pstree process
+\item 
+zsh: parent process acting as the interpreter who executes de pstree command
+\item 
+konsole: terminal emulator used
+\item 
+kded5: consolidates several small services in one process.
+\item 
+kdeinit5: kdeinit5 is a process launcher somewhat similar to the famous init used for booting UNIX. It executes KDE programs and kdeinit loadable modules (KLMs) starting them more efficiently.
+\end{itemize}
+
+And by looking a the whole structure more precisely:
+
+\begin{plain}
+kdeinit5(1436)---file.so(2095)
+               |--kaccess(1447)---{kaccess}(1448)
+               |               '--{kaccess}(1460)
+               |--kded5(1440)---konsole(26378)---zsh(26387)---tmux: client(29455)
+               |             |--konsole(45467)---zsh(45474)---pstree(48850)
+               |             |                |--{konsole}(45468)
+               |             |                |--{konsole}(45469)
+               |             |                |--{konsole}(45470)
+               |             |                |--{konsole}(45471)
+               |             |                |--{konsole}(45472)
+               |             |                '--{konsole}(45473)
+\end{plain}
+
+we can see the whole hierarchy with the pid associated to them with the threads associated (\{\})
+
+{-\allowbreak}5. By looking, in my case, through a tmux instance, we see the following structure:
+
+\begin{plain}
+opc :: /tmp » pstree -c -g -p 29457        
+tmux: server(29457,29457)---zsh(29458,29458)
+                          |--zsh(29500,29500)---evince(35564,35564)---{evince}(35568,35564)
+                          |                                        |--{evince}(35569,35564)
+                          |                                        |--{evince}(35571,35564)
+                          |                                        '--{evince}(35588,35564)
+                          |--zsh(37609,37609)---vim(37739,37739)
+                          |--zsh(37756,37756)---vim(37994,37994)
+                          '--zsh(38636,38636)
+opc :: /tmp » 
+\end{plain}
+
+where:
+
+\begin{itemize}
+\item 
+Each tab is represented as a new child process, where all of them have a common parent {-\allowbreak}tmux: server
+\item 
+We can see the same structure in each "tab{-\allowbreak}window". An instance of zsh (alternative of bash) that executes the corresponding application (evince, vim)
+\end{itemize}
+
+{-\allowbreak}6. By opening an xterm console, we see the following:
+
+\begin{plain}
+|-plasmashell(1498,1496)
+|                        |-xterm(54003,1496)---zsh(54006,54006) ...
+
+\end{plain}
+
+\begin{itemize}
+\item 
+The parent process is not the same as we are not using a native kde application, which were controlled by a kde5 process.
+\end{itemize}
+
+{-\allowbreak}7.  We have the following:
+
+\begin{itemize}
+\item 
+t1: running in foreground. The terminal is "blocked" and we can not execute another program
+\item 
+t2: running in the background. We can execute other programs in the terminal and we have the pid associated with the xclock program (pid: 54875)
+\end{itemize}
+
+{-\allowbreak}8.    Where the possible states are the following:
+
+\begin{plain}
+PROCESS STATE CODES
+       Here are the different values that the s, stat and state output specifiers (header "STAT" or "S") will display to describe the state of
+       a process:
+
+               D    uninterruptible sleep (usually IO)
+               I    Idle kernel thread
+               R    running or runnable (on run queue)
+               S    interruptible sleep (waiting for an event to complete)
+               T    stopped by job control signal
+               t    stopped by debugger during the tracing
+               W    paging (not valid since the 2.6.xx kernel)
+               X    dead (should never be seen)
+               Z    defunct ("zombie") process, terminated but not reaped by its parent
+\end{plain}
+
+\begin{itemize}
+\item 
+t1: by executing
+\end{itemize}
+
+\begin{plain}
+opc :: ~ » ps -C xeyes -o pid,state,tty,ppid
+    PID S TT          PPID
+  54854 S pts/10     37756
+opc :: ~ » 
+\end{plain}
+
+where the states a
+
+\begin{itemize}
+\item 
+t2: 
+\end{itemize}
+
+\begin{plain}
+opc :: ~ » ps -C xclock -o pid,state,tty,ppid
+    PID S TT          PPID
+  54797 S pts/3      45474
+opc :: ~ » 
+\end{plain}
+
+We can see that:
+
+\begin{itemize}
+\item 
+We have differents tty, as we are using differents "konsole" windows
+\item 
+Each one has a different PPID, as they are created from differents zsh instances
+\end{itemize}
+
+{-\allowbreak}9.
+
+\begin{plain}
+opc :: ~ » kill -9 37756
+\end{plain}
+
+{-\allowbreak}10.  First we tried to do it with zsh, but zsh does not enable orphan process, as when you type exit{\allowbreak}(terminating the zsh processs) zsh terminates all the background process iniciated by zsh. So we then do it with bash:
+
+\begin{itemize}
+\item 
+PPID: 57901
+\end{itemize}
+
+Then:
+
+\begin{plain}
+opc :: ~ » ps -C xclock -o pid,state,tty,ppid
+    PID S TT          PPID
+  57936 S pts/2          1
+opc :: ~ » 
+\end{plain}
+
+\begin{itemize}
+\item 
+As we see it, now the process has the init process (PID=1) as a parent
+\end{itemize}
+
+{-\allowbreak}11.
+
+\begin{plain}
+opc :: ~ » kill -9 57936
+\end{plain}
+
+{-\allowbreak}12,13,14.
+
+\begin{itemize}
+\item 
+Using signals:
+\end{itemize}
+
+\begin{plain}
+opc :: ~ » ps -C xclock -o pid,state,tty,ppid
+    PID S TT          PPID
+  89002 S pts/6      88397
+opc :: ~ » kill -SIGSTOP 89002               
+opc :: ~ » ps -C xclock -o pid,state,tty,ppid
+    PID S TT          PPID
+  89002 T pts/6      88397
+opc :: ~ » kill -SIGCONT 89002
+opc :: ~ » ps -C xclock -o pid,state,tty,ppid
+    PID S TT          PPID
+  89002 S pts/6      88397
+opc :: ~ » kill -SIGKILL 89002 
+\end{plain}
+
+\begin{itemize}
+\item 
+Using job control 
+\end{itemize}
+
+\begin{plain}
+opc :: ~ » xclock 
+Warning: Missing charsets in String to FontSet conversion
+^Z
+[1]  + 90314 suspended  xclock
+opc :: ~ » jobs                                                                                                       148 ↵
+[1]  + suspended  xclock
+opc :: ~ » kill -SIGCONT %1       
+opc :: ~ » jobs
+[1]  + running    xclock
+opc :: ~ » kill -SIGKILL %1
+[1]  + 90314 killed     xclock                                                                                              
+opc :: ~ » 
+\end{plain}
+
+{-\allowbreak}15.
+
+\begin{plain}
+opc :: ~ » jobs
+[1]    running    xclock
+[2]    running    xclock
+[3]  - running    xeyes
+[4]  + running    xeyes
+opc :: ~ » fg %1
+^Z
+opc :: ~ » bg %1
+opc :: ~ » killall xclock
+opc :: ~ » killall xeyes
+\end{plain}
+
+{-\allowbreak}16.
+
+\begin{plain}
+opc :: ~ » ps && sleep 3 && ps
+    PID TTY          TIME CMD
+  87876 pts/2    00:00:06 zsh
+  91167 pts/2    00:00:00 ps
+    PID TTY          TIME CMD
+  87876 pts/2    00:00:06 zsh
+  91170 pts/2    00:00:00 ps
+opc :: ~ » 
+\end{plain}
+
+\begin{itemize}
+\item 
+We can see that the PID of the ps instance is different after the sleep{\allowbreak}(3), as we are creating different processes
+\end{itemize}
+
+{-\allowbreak}17.
+
+\begin{plain}
+opc :: ~ » ps -nothing || ps 
+error: unsupported SysV option
+
+Usage:
+ ps [options]
+
+ Try 'ps --help <simple|list|output|threads|misc|all>'
+  or 'ps --help <s|l|o|t|m|a>'
+ for additional help text.
+
+For more details see ps(1).
+    PID TTY          TIME CMD
+  87876 pts/2    00:00:06 zsh
+  91301 pts/2    00:00:00 ps
+opc :: ~ » 
+\end{plain}
+
+\begin{itemize}
+\item 
+The last command (ps) will only execute if the first one has and error exit code, which is the case
+\end{itemize}
+
+{-\allowbreak}18.
+
+\begin{itemize}
+\item 
+1:
+\end{itemize}
+
+\begin{plain}
+opc :: ~ » sleep || sleep || ls 
+sleep: falta un operando
+Pruebe 'sleep --help' para más información.
+sleep: falta un operando
+Pruebe 'sleep --help' para más información.
+bin  Descargas  Documentos  Escritorio  Imágenes  kwin-tiling  m  Python  Universidad  VM
+opc :: ~ » 
+\end{plain}
+
+\begin{itemize}
+\item 
+As "||" will only execute if the first one has an error, the first one sleep have errors, so the ls commands is executed 
+\end{itemize}
+
+\begin{itemize}
+\item 
+2:
+\end{itemize}
+
+\begin{plain}
+opc :: ~ » sleep && sleep --help || ls && ps
+sleep: falta un operando
+Pruebe 'sleep --help' para más información.
+bin  Descargas  Documentos  Escritorio  Imágenes  kwin-tiling  m  Python  Universidad  VM
+    PID TTY          TIME CMD
+  87876 pts/2    00:00:07 zsh
+  91700 pts/2    00:00:00 ps
+opc :: ~ » 
+\end{plain}
+
+\begin{itemize}
+\item 
+The first sleep has an error, so the second one will not execute
+\item 
+As the last executed was exit successfully, the ls command will execute
+\item 
+The last ps will execute, as the previous command did not have any error
+\end{itemize}
+
+\begin{itemize}
+\item 
+3:
+\end{itemize}
+
+\begin{plain}
+pc :: ~ » sleep && sleep --help || ls || ps                             
+sleep: falta un operando
+Pruebe 'sleep --help' para más información.
+bin  Descargas  Documentos  Escritorio  Imágenes  kwin-tiling  m  Python  Universidad  VM
+opc :: ~ » 
+
+\end{plain}
+
+\begin{itemize}
+\item 
+The same as before, but the last ps will not execute as the "ls" command did run successfully
+\end{itemize}
+
+\subsubsection{Exercise 2.2}
+
+{-\allowbreak}1.
+
+\begin{itemize}
+\item 
+script.sh:
+\end{itemize}
+
+\begin{plain}
+#!/bin/sh
+# script.sh
+
+read NUMBER
+echo "Number: $NUMBER"
+echo "Result: $[NUMBER * 7]"
+\end{plain}
+
+\begin{itemize}
+\item 
+result:
+\end{itemize}
+
+\begin{plain}
+opc :: /tmp » ./script.sh                                  
+8
+Number: 8
+Result: 56
+opc :: /tmp » 
+\end{plain}
+
+{-\allowbreak}2. 
+
+\begin{itemize}
+\item 
+script2.sh
+\end{itemize}
+
+\begin{plain}
+#!/bin/sh
+# script2.sh
+
+# Trap function
+trap "echo signal captured" USR1
+
+# Main function
+while true
+do
+        sleep 1
+done
+\end{plain}
+
+\begin{itemize}
+\item 
+result:
+\end{itemize}
+
+\begin{plain}
+opc :: /tmp » kill -USR1 93268      
+opc :: /tmp » signal captured
+\end{plain}
+
+\clearpage
+
+\subsection{File system}
+
+\subsubsection{Exercise 3.1}
+
+{-\allowbreak}1,2,3,4,5.
+
+\begin{plain}
+# Moving directories
+opc :: /tmp/ADMINUX » cd ~          
+opc :: ~ » cd ../../etc 
+opc :: /etc » 
+opc :: /etc » cd /home/op          
+opc :: ~ » 
+# Copying files
+opc :: ~ » cp ../../etc/passwd .
+# Deleting directories
+opc :: /tmp » rm -rf dir{A,B}{1,2}
+opc :: /tmp » rm -rf dir{A,B}*
+opc :: /tmp » rm -rf dirC?
+\end{plain}
+
+{-\allowbreak}6,7,8,9.
+
+\begin{plain}
+# Creation files
+opc :: /tmp » touch temp.txt  
+opc :: /tmp » cat temp.txt      
+opc :: /tmp » stat temp.txt                                                                                               Fichero: temp.txt
+  Tamaño: 0             Bloques: 0          Bloque E/S: 4096   fichero regular vacío
+Dispositivo: 24h/36d    Nodo-i: 1392        Enlaces: 1
+Acceso: (0664/-rw-rw-r--)  Uid: ( 1000/      op)   Gid: ( 1000/      op)
+Contexto: unconfined_u:object_r:user_tmp_t:s0
+      Acceso: 2021-01-26 16:43:56.936980808 +0100
+Modificación: 2021-01-26 16:43:54.511964491 +0100
+      Cambio: 2021-01-26 16:43:54.511964491 +0100
+    Creación: -
+opc :: /tmp » 
+\end{plain}
+
+{-\allowbreak}10. 
+
+\begin{plain}
+opc :: /tmp » cp temp.txt /usr    
+cp: no se puede crear el fichero regular '/usr/temp.txt': Permiso denegado
+opc :: /tmp » 
+\end{plain}
+
+\begin{itemize}
+\item 
+We can not write anything to the {/\allowbreak}usr directory
+\item 
+As everything is a "file", we can look the permisiosn related to the {/\allowbreak}usr directory:
+\end{itemize}
+
+\begin{plain}
+drwxr-xr-x.  13 root root  4096 nov  6 21:54 usr
+\end{plain}
+
+\begin{itemize}
+\item 
+We can see that only the root user and root groupd have the basics permisions. The other only have the "x" permision i.e. execution of programs
+\end{itemize}
+
+{-\allowbreak}11,12.
+
+\begin{plain}
+opc :: /tmp/practices » mkdir permission
+opc :: /tmp/practices » mkdir no_permission
+opc :: /tmp/practices » chmod u-w no_permission
+opc :: /tmp/practices » 
+opc :: /tmp/practices » ls -l
+total 0
+dr-xrwxr-x. 2 op op 40 ene 26 16:53 no_permission
+drwxrwxr-x. 2 op op 40 ene 26 16:53 permission
+opc :: /tmp/practices » 
+\end{plain}
+
+\begin{itemize}
+\item 
+We don't have write permission to the no{\_\allowbreak}permission directory, so we can not create any files inside it
+\end{itemize}
+
+\begin{plain}
+opc :: /tmp/practices » touch no_permission/temp.txt
+touch: no se puede efectuar `touch' sobre 'no_permission/temp.txt': Permiso denegado
+opc :: /tmp/practices » touch permission/tempt.txt                                                                      
+opc :: /tmp/practices »
+\end{plain}
+
+{-\allowbreak}13.
+
+\begin{plain}
+Commands 				read | write | execute
+------- 				----------------------
+cd no_permission;			ok     no      no
+cd no_permission; ls -l                 ok     no      no
+cd temp ~/practices/no_permission       ok     ok      no
+\end{plain}
+
+\subsubsection{Exercise 3.2}
+
+{-\allowbreak}1,2,3.
+
+\begin{plain}
+opc :: /tmp » touch temp.txt            
+opc :: /tmp » touch origin.txt         
+opc :: /tmp » ln -s origin.txt link.txt
+\end{plain}
+
+\begin{itemize}
+\item 
+Does not matter which file we modify.
+\end{itemize}
+
+{-\allowbreak}4. 
+
+\begin{plain}
+opc :: /tmp » chmod u-rwx origin.txt 
+opc :: /tmp » cat origin.txt        
+cat: origin.txt: Permiso denegado
+opc :: /tmp » cat link.txt                                                                                              1 ↵
+cat: link.txt: Permiso denegado
+opc :: /tmp »    
+\end{plain}
+
+\begin{itemize}
+\item 
+We can not do anything from the symbolic link neither
+\end{itemize}
+
+{-\allowbreak}5. 
+
+\begin{plain}
+opc :: /tmp/practices » chmod u-w link.txt      
+opc :: /tmp/practices » ls -l             
+total 4
+lrwxrwxrwx. 1 op op 10 ene 26 17:17 link.txt -> origin.txt
+d---rwxr-x. 2 op op 40 ene 26 16:53 no_permission
+-r--rw-r--. 1 op op  6 ene 26 17:19 origin.txt
+drwxrwxr-x. 2 op op 60 ene 26 16:55 permission
+opc :: /tmp/practices » 
+\end{plain}
+
+\begin{itemize}
+\item 
+Removing the write permision into the symbolic link \textbf{implies removing access to the main file}
+\end{itemize}
+
+{-\allowbreak}6. 
+
+\begin{itemize}
+\item 
+In this case, the "hello" is then transfered to the origin.txt. While the origin.txt does not exist, "link.txt" has a broken link, but it "has some content inside" that is "transfered" once we create the archive by opening vi.
+\end{itemize}
+
+{-\allowbreak}7,8,9.
+
+\begin{plain}
+opc :: /tmp/practices » stat origin.txt 
+  Fichero: origin.txt
+  Tamaño: 6             Bloques: 8          Bloque E/S: 4096   fichero regular
+Dispositivo: 24h/36d    Nodo-i: 1449        Enlaces: 2
+Acceso: (0464/-r--rw-r--)  Uid: ( 1000/      op)   Gid: ( 1000/      op)
+Contexto: unconfined_u:object_r:user_tmp_t:s0
+      Acceso: 2021-01-26 17:20:23.373068406 +0100
+Modificación: 2021-01-26 17:19:59.209904892 +0100
+      Cambio: 2021-01-26 17:41:29.568391461 +0100
+    Creación: -
+opc :: /tmp/practices » 
+\end{plain}
+
+\begin{itemize}
+\item 
+With the hard lin way, the stat command show us the "links"
+\end{itemize}
+
+Then when we remove the origin.txt:
+
+\begin{itemize}
+\item 
+Now the other one, as we have a hard link (ie. the same file with different links), the file can be modified as if nothign has happened. 
+\end{itemize}
+
+So in conclusion:
+
+\begin{itemize}
+\item 
+Hard link: creation of the same file
+\item 
+Soft link: link to a file that can o can not exist
+\end{itemize}
+
+{-\allowbreak}10. 
+
+\begin{plain}
+opc :: /tmp » cat /etc/services| grep "HTTP" | wc -l
+104
+opc :: /tmp » 
+\end{plain}
+
+{-\allowbreak}11.
+
+\begin{plain}
+opc :: /tmp » cat /etc/group | cut -d ":" -f 1,4  
+\end{plain}
+
+\begin{itemize}
+\item 
+Where not all the groups have some user in them
+\end{itemize}
+
+{-\allowbreak}12.
+
+\begin{plain}
+opc :: /tmp » touch tex1.txt  
+opc :: /tmp » echo "abñ" > tex1.txt                                            
+opc :: /tmp » file tex1.txt 
+tex1.txt: UTF-8 Unicode text
+opc :: /tmp » 
+\end{plain}
+
+{-\allowbreak}13. The encoding of "ñ" is:
+
+\begin{itemize}
+\item 
+ISO{-\allowbreak}8859{-\allowbreak}15: 0x00F1
+\item 
+UTF{-\allowbreak}8: 0x\-C3 B1
+\end{itemize}
+
+So by looking at the hexadecimals:
+
+\begin{itemize}
+\item 
+ISO{-\allowbreak}8859{-\allowbreak}15: we see "b1c3" due to the endianess
+\end{itemize}
+
+\begin{plain}
+opc :: /tmp » hexdump tex1.txt     
+0000000 6261 b1c3 000a                         
+0000005
+opc :: /tmp » 
+\end{plain}
+
+{-\allowbreak}14,15,16.
+
+\begin{itemize}
+\item 
+0x0a (UTF{-\allowbreak}8): corresponts to the line feed (EOL)
+\item 
+0x0d (UTF{-\allowbreak}8): corresponts to the carriage return (cr)
+\end{itemize}
+
+\clearpage
+
+\subsection{File descriptors}
+
+\subsubsection{Exercise 4.1}
+
+{-\allowbreak}1.
+
+\begin{plain}
+opc :: /tmp/ADMINUX » touch mylist.txt 
+opc :: /tmp/ADMINUX » ls     
+mylist.txt
+opc :: /tmp/ADMINUX » ls -R /etc > mylist.txt && echo "CONTENTS OF ETC" >> mylist.txt   opc :: /tmp/ADMINUX » tail --lines=10 < mylist.txt    
+rpmfusion-free-updates-testing.repo
+rpmfusion-nonfree.repo
+rpmfusion-nonfree-updates.repo
+rpmfusion-nonfree-updates-testing.repo
+tailscale.repo
+vscodium.repo
+
+/etc/zfs-fuse:
+zfs_pool_alert
+CONTENTS OF ETC
+opc :: /tmp/ADMINUX » 
+\end{plain}
+
+{-\allowbreak}2.  By concateneting the following commands:
+
+\begin{plain}
+opc :: /tmp/ADMINUX » sudo echo "CONTENT OF ETC" > mylist.txt && sudo ls -R /etc >> mylist.txt && head -n 10 < mylist.txt
+CONTENT OF ETC
+/etc:
+abrt
+adjtime
+aliases
+alsa
+alternatives
+anaconda
+anacrontab
+appstream.conf
+opc :: /tmp/ADMINUX » 
+\end{plain}
+
+{-\allowbreak}3. 
+
+\begin{plain}
+opc :: /tmp/ADMINUX » ls /bin | wc --lines
+2668
+opc :: /tmp/ADMINUX » 
+\end{plain}
+
+{-\allowbreak}4.
+
+\begin{plain}
+opc :: /tmp/ADMINUX » ls /bin | head -n 3 | sort --reverse 
+7za
+7z
+[
+opc :: /tmp/ADMINUX » 
+\end{plain}
+
+{-\allowbreak}5. 
+
+\begin{plain}
+opc :: /tmp/ADMINUX » ls /bin | sort --reverse | tail -n 3
+7za
+7z
+[
+opc :: /tmp/ADMINUX » 
+\end{plain}
+
+{-\allowbreak}6.
+
+\begin{plain}
+opc :: /tmp/ADMINUX » cat /etc/{group,passwd} | wc --lines
+123
+opc :: /tmp/ADMINUX » 
+\end{plain}
+
+{-\allowbreak}7.
+
+\begin{plain}
+opc :: /tmp/ADMINUX » ps -A -o pid,ppid,tty,time,cmd | head -n 2
+    PID    PPID TT           TIME CMD
+      1       0 ?        00:00:02 /usr/lib/systemd/systemd --switched-root --system --deserialize 30
+\end{plain}
+
+\begin{itemize}
+\item 
+Where the process with PID seems to be the scheluder of the scheluder 
+\end{itemize}
+
+\subsubsection{Exercise 4.2}
+
+\begin{plain}
+opc :: /tmp/ADMINUX » cat /etc/passwd > /dev/pts/4 
+\end{plain}
+
+and then execute in each terminal the redirection to the other {/\allowbreak}dev{/\allowbreak}pts{/\allowbreak}..
+
+\subsubsection{Exercise 4.3}
+
+\begin{plain}
+# We create to FIFO pipes
+$: mkfifo pipe1 pipe2
+
+# We concatenate cat to the input of the pipe (i.e: x) + 
+# the output of the FIFO pipe
+# And all of it's output is redirected to the FIFO pipe2
+# and we set it to the background
+# Problems:
+# - pipe1: will wait for someone to insert data 
+# - pipe2: will wait for someone to read data
+$: echo -n x | cat - pipe1 > pipe2 &
+
+# We connect:
+# input: pipe2
+# output: pipe1
+# Problems:
+# pipe2: waiting for someone to put data
+# pipe1: waiting for someone to reading data
+$: cat <pipe2 > pipe1
+\end{plain}
+
+\subsubsection{Exercise 4.4}
+
+{-\allowbreak}1. 
+
+\begin{plain}
+opc :: /tmp/ADMINUX » lsof /etc/passwd                                                  
+COMMAND   PID USER   FD   TYPE DEVICE SIZE/OFF    NODE NAME
+less    19118   op    4r   REG  253,0     2628 2099117 /etc/passwd
+less    19124   op    4r   REG  253,0     2628 2099117 /etc/passwd
+opc :: /tmp/ADMINUX » ps -p 19118              
+    PID TTY          TIME CMD
+  19118 pts/2    00:00:00 less
+opc :: /tmp/ADMINUX » ps -p 19124
+    PID TTY          TIME CMD
+  19124 pts/4    00:00:00 less
+opc :: /tmp/ADMINUX » 
+\end{plain}
+
+{-\allowbreak}2.
+
+\begin{plain}
+opc :: /tmp/ADMINUX » fuser /etc/passwd                    
+/etc/passwd:         19118 19124
+opc :: /tmp/ADMINUX » kill -9 {19118,19124}
+opc :: /tmp/ADMINUX » 
+\end{plain}
+
+\clearpage
+
+\subsection{Scripts}
+
+\subsubsection{Exercise 11.1}
+
+\begin{bash}
+#!/bin/bash
+# AUTHOR: teacher
+# DATE: 4#10#2011
+# NAME: shellinfo.sh
+# SYNOPSIS: shellinfo.sh [arg1 arg2 ... argN]
+# DESCRIPTION: Provides information about the script.
+# HISTORY: First version
+
+# Print PID
+echo "My PID is $$"
+# Print name of file $0=shellinfo
+echo "The name of the script is $0"
+# Print the number of parameters passed
+# after the shellinfo.sh ...
+echo "The number of parameters received is $#"
+
+# If number of parameters is greater than 0
+if [ $# -gt 0 ]; then
+	# Declare variable I
+	I=1
+	# For over the element passed
+	for PARAM in $@
+	do
+		# We echo:
+		# "\$" = $
+		# "$I" = I (value) 
+		echo "Parameter \$$I is $PARAM"
+
+		# We do arithmetic operation
+		# so we need the double "(())"" 
+		# And we simply sum + 1
+		((I++))
+	done
+fi
+\end{bash}
+
+Output:
+
+\begin{plain}
+opc :: 4A#ADMINUX#scripts ‹main*› » .#shellinfo.sh 1 2 3 4 5
+My PID is 69933
+The name of the script is .#shellinfo.sh 
+The number of parameters received is 5
+Parameter $1 is 1
+Parameter $2 is 2
+Parameter $3 is 3
+Parameter $4 is 4
+Parameter $5 is 5
+opc :: 4A#ADMINUX#scripts ‹main*› » 
+\end{plain}
+
+\subsubsection{Exercise 11.2}
+
+\begin{bash}
+#!/bin/bash
+# AUTHOR: teacher
+# DATE: 4#10#2011
+# NAME: clean.sh
+# SYNOPSIS: clean.sh (without parameters)
+# DESCRIPTION: Removes temporal files in your working directory:
+# HISTORY: First version
+
+echo "Really clean this directory?"
+# Read and assign it to var YORN
+read YORN
+# Case statement of var YORN
+case $YORN in
+	# In case Yorn equal y#Y#s#S
+	y|Y|s|S) ACTION=0;;
+
+
+	# In case Yorn equal n#N
+	n|N) ACTION=1;;
+
+	# Otherwise
+	*) ACTION=2;;
+esac
+
+if [ $ACTION -eq 0 ]; then
+	# Remove all files that match the patterns
+	# It also looks for invisible files
+	rm -f \#* *~ .*~ *.bak .*.bak *.backup *.tmp .*.tmp core a.out
+	echo "Cleaned"
+	exit 0
+elif [ $ACTION -eq 1 ]; then
+	echo "Not Cleaned"
+	exit 0
+elif [ $ACTION -eq 2 ]; then
+	echo "$YORN is no an allowed answer. Bye bye"
+	exit 1
+else
+	echo "Uaggg!! Symptomatic Error"
+	exit 2
+fi
+\end{bash}
+
+\subsubsection{Exercise 11.3}
+
+\begin{bash}
+opc :: 4A#ADMINUX#scripts ‹main*› » cat root.sh      
+#!/bin/bash
+# AUTHOR: opc
+# DATE: 28#1#2021 
+# NAME: squareroot.sh
+# SYNOPSIS: root.sh number
+# DESCRIPTION: Computes root square of number given
+# HISTORY: First version
+
+square() {
+  local CAT1 CAT2 RESULT
+  CAT1=$1
+  CAT2=$2
+  ((RESULT = (CAT1**2 + CAT2**2) ** 1#2))
+  echo $RESULT
+}
+if [ ! $# -eq 2 ]; then
+        echo "Incorrect number of arguments"
+        exit 1
+fi
+
+echo "Square root of "
+echo "$1"
+echo "$2"
+echo "Result"
+square "$1" "$2"
+exit 0
+\end{bash}
+
+\subsubsection{Exercise 11.4}
+
+\begin{bash}
+#!/bin/bash
+# AUTHOR: teacher
+# DATE: 4#10#2011
+# NAME: fill_terminal_procedure.sh
+# SYNOPSIS: fill_terminal arg
+# DESCRIPTION: Procedure to fill the terminal with a printable character
+# FUNCTION NAME: fill_terminal:
+# OUTPUT: none
+# RETURN CODES: 0-success 1-bad-number-of-args 2-not-a-printable-character.
+# HISTORY: First version
+
+# Function declaration
+fill_terminal() {
+
+# If number of argument not equal to 1 return 1
+# Otherwhise continue with the function
+[ $# -ne 1 ] && return 1
+
+	# Local declarations
+	local HEXCHAR DECCHAR i j
+	# First argument of function
+	HEXCHAR=$1
+	# Print with format HEXCHAR var
+	DECCHAR=‘printf "%d" 0x$HEXCHAR‘
+	# var DECCHAR [33,127] limit return 2
+	# Otherwise continue function
+	if [ $DECCHAR -lt 33 -o $DECCHAR -gt 127 ]; then
+		return 2
+	fi
+	# If columns is a string assign 80 
+	[ -z "$COLUMNS" ] && COLUMNS=80
+	# If lines is a string assign 24
+	[ -z "$LINES" ] && LINES=24
+	# Minus 2 to linux
+	((LINES-=2))
+	# for c style bver number of colums
+	for((i=0; i< COLUMNS; i++))
+	do
+		# for c style of number of lines
+		for ((j=0; j< LINES; j++))
+		do
+		  printf "\x$HEXCHAR"
+		done
+	done
+	return 0
+}
+
+#!#bin#bash
+# AUTHOR: teacher
+# DATE: 4#10#2011
+# NAME: procedure.sh
+# SYNOPSIS: procedure.sh arg
+# DESCRIPTION: Use the fill_terminal procedure
+# HISTORY: First version
+
+# Using the other script, source all the variables
+# to the current terminal (bash) process
+# As it has defined one function, the function
+# is available to our current context
+source fill_terminal_procedure.sh
+
+# Execute function with parameters to the general function
+# $@: list of parameters
+fill_terminal $@
+# Case statemnt over return code of last executed function
+# which is this case will be fill_terminal function
+# $?: return code
+case $? in
+	0)
+	exit 0 ;;
+
+	# Print the error to the stdout output
+	# &2: write stdout to error file descriptor (2)
+	1)
+	echo "I need one argument (an hex value)" >&2 ; exit 1 ;;
+	
+	# Same
+	2)
+	echo "Not printable character. Try one between 0x21 and 0x7F" >&2 ; exit 1 ;;
+	146
+
+	# Same
+	*)
+	echo "Internal error" >&2 ; exit 1
+	esac
+\end{bash}
+
+\subsubsection{Exercise 11.5}
+
+\begin{bash}
+#!/bin/bash
+# AUTHOR: teacher
+# DATE: 4#10#2011
+# NAME: recfind.sh
+# SYNOPSIS: recfind.sh file_to_be_found
+# DESCRIPTION: Search recursively a file from the working directory
+# HISTORY: First version
+# Function: search_in_dir
+# Arguments: search directory
+
+# 
+function search_in_dir() {
+	# local var definition
+	local fileitem
+	# If DEBUG is set print degut message
+	[ $DEBUG -eq 1 ] && echo "Entrant a $1"
+	# Change directory to the argument passed
+	cd $1
+	# for over all the elements of the directory
+	for fileitem in *
+	do
+		# If file is a directory
+		# run function recursively
+		if [ -d $fileitem ]; then
+			search_in_dir $fileitem
+		# Not a directory, just print full path
+		# of the file, in case is the file we
+		# are looking for (FILE_IN_SEARCH)
+		elif [ "$fileitem" = "$FILE_IN_SEARCH" ]; then
+			echo ‘pwd‘#$fileitem
+		fi
+	done
+	# If DEBUG is set print degut message
+	[ $DEBUG -eq 1 ] && echo "Sortint de $1"
+	# Change directory one level above
+	cd ..
+	}
+
+DEBUG=0
+# If no arguments are passed print error and exit
+if [ $# -ne 1 ]; then
+	echo "Usage: $0 file_to_search"
+	exit 1
+fi
+
+# File we are looking to search
+FILE_IN_SEARCH=$1
+# Execute function with pwd command result as argument
+# Search will look into our directory the FILE_IN_SEARCH
+# file
+search_in_dir ‘pwd‘
+
+\end{bash}
+
+\subsubsection{Exercise 11.6}
+
+\begin{bash}
+#!/bin/bash
+# AUTHOR: opc 
+# DATE: 29#1#21 
+# NAME: factorial.sh
+# SYNOPSIS: factorial.sh number 
+# DESCRIPTION: Computes factorial of number given 
+# HISTORY: First version
+
+
+if [ ! $# -eq 1 ]; then
+       echo "Incorrect number of arguments"
+       echo "Usage: .#factorial.sh x"       
+       exit 1
+fi
+RESULT=1
+NUMBER=$1
+
+while [ $NUMBER -gt 1 ]
+do
+        RESULT=$(( RESULT * NUMBER ))
+        NUMBER=$(( NUMBER - 1))
+done
+echo $RESULT
+\end{bash}
+
+\subsubsection{Exercise 11.7}
+
+{-\allowbreak}1.
+
+\begin{plain}
+opc :: 4A#ADMINUX#scripts ‹main*› » tail re.txt | grep --line-buffered kernel | cut -c 1-10
+\end{plain}
+
+\begin{itemize}
+\item 
+I could not acomplish it with the "tail {-\allowbreak}f" options, as it seems that the cut command does not flush is contents and nnot output is shown
+\end{itemize}
+
+\clearpage
+
+\end{document}

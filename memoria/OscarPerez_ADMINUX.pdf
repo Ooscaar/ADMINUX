@@ -1,0 +1,19 @@
+<umdoc> 
+      <set name="version" value="1.0"/>
+      
+      <document>
+		<tex>\title{\bfseries \Huge ADMINUX\\ } \author{Òscar Pérez Castillo} \date{\today}\maketitle\thispagestyle{empty}</tex>
+	    <pageBreak/>
+	    <tex>\sloppy</tex>
+            <tableOfContents/>
+            <pageBreak/>
+	    <md file="01_procesos.md"/>
+	    <pageBreak/>
+	    <md file="02_filesystems.md"/>
+	    <pageBreak/>
+	    <md file="03_filedescriptors.md"/>
+	    <pageBreak/>
+	    <md file="04_scripts.md"/>
+	    <pageBreak/>
+      </document>
+</umdoc>
